@@ -257,3 +257,4 @@ def test_ExtractDocumentElements():
 def test_ExtractDocumentText():
     extractDocumentText(extractDocumentElements(classifyDocument(convertDocument(extractDocumentMetadata(insightIngest(upload(DataVariables.CmsImage)))))))
 #****************************************************
+#********************made Changes********************
