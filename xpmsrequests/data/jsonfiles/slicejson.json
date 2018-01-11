@@ -1,0 +1,22 @@
+{
+  "data": {
+    "resources": [
+      {
+        "fields": [
+          {
+
+              "coordinates": [
+                {}
+              ],
+              "name": "string",
+              "padding": [
+                {}
+              ]
+
+          } ],
+        "file_path": "string"
+      }
+    ]
+  },
+  "solution_id": "string"
+}

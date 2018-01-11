@@ -1,0 +1,16 @@
+{
+  "data": {
+    "resources": [
+      {
+        "fields": [
+          {
+            "field_type": "string",
+            "name": "string",
+            "file_path": "string"
+          }
+        ]
+      }
+    ]
+  },
+  "solution_id": "string"
+}

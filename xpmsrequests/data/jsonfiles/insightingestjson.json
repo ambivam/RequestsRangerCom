@@ -1,0 +1,8 @@
+{
+  "data": {
+    "file_path": ["string"],
+	"request_type": "string"
+  },
+  "entity_id": "string",
+  "solution_id": "string"
+}
