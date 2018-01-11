@@ -256,4 +256,4 @@ def test_ExtractDocumentElements():
 @allure.story('Smoke','ExtractDocumentText')
 def test_ExtractDocumentText():
     extractDocumentText(extractDocumentElements(classifyDocument(convertDocument(extractDocumentMetadata(insightIngest(upload(DataVariables.CmsImage)))))))
-#****************************************************
+#************************M****************************
