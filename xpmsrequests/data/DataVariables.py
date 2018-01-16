@@ -8,9 +8,12 @@ CmsImage = 'CMS1500_1.png'
 
 JpgImage = 'cms_1.jpg'
 
+#CogXBaseUrl = 'http://apigw-dev.ranger.xpms.ai/apidocs'
 CogXBaseUrl = 'http://devintkapi.apps.xpms.io/'
 
-#CogXBaseUrl = 'http://apigw-dev.ranger.xpms.ai/apidocs'
+TestSuiteExcel = 'TestSuiteRestServices.xlsx'
+
+TestDataExcel = 'TestSuiteData.xlsx'
 
 Image = 'image'
 
@@ -50,6 +53,7 @@ entityId = '66db655d-c6fa-4d97-b1dd-c3f75e4eb54f'
 
 solutionId = 'test_2de78758-b3b8-4c7c-b08c-cde339dea7e8'
 #*********************jsonfiles ranger*******************
+
 Insightingestjson = 'insightingestjson.json'
 
 GetInsightJson = 'getinsight.json'
@@ -64,4 +68,4 @@ RangerUploadURL = RangerURL + 'upload'+'/'
 
 GetInsightURL = RangerURL + 'insight/getInsight'
 
-#ExtractDocumentMetadataURL = ''
+#********************************************************
