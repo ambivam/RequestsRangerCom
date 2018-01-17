@@ -1,12 +1,12 @@
 import pytest
 import os
 import json
-import  logging
+import logging
 import allure
 
 from xpmsrequests.rangerrequests import  requestsranger
 from xpmsrequests.data import DataVariables
-from xpmsrequests.configuration import ExcelReading
+
 
 logger = logging.getLogger(__name__)
 
@@ -182,6 +182,7 @@ def extractDocumentText(extractDocumentElementsJobIdentifier):
             result = True
 
         assert True, result
+        #assert False, result
         logger.info('Testing ExtractDocumentText method passed')
         logger.info('**********************************************************')
         return JobId
@@ -190,6 +191,7 @@ def extractDocumentText(extractDocumentElementsJobIdentifier):
         logger.error('Testing ExtractDocumentText method failed')
         logger.info('**********************************************************')
         assert True == result
+        #assert False == result
 
 
 #***********************************************
