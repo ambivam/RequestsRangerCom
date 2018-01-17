@@ -11,7 +11,7 @@ from xpmsrequests.configuration import ExcelReading
 logger = logging.getLogger(__name__)
 
 #*************************************************
-def serviceupload(filename):
+def upload(filename):
     logger.info('**********************************************************' )
     result = False
     try:
@@ -37,7 +37,7 @@ def serviceupload(filename):
     logger.info('**********************************************************')
 
 #*************************************************
-def serviceinsightIngest(uploadJson):
+def insightIngest(uploadJson):
     logger.info('**********************************************************')
     result = False
     try:
@@ -62,7 +62,7 @@ def serviceinsightIngest(uploadJson):
         assert True == result
 
 # *************************************************
-def serviceextractDocumentMetadata(injestInsightJobIdentifier):
+def extractDocumentMetadata(injestInsightJobIdentifier):
     logger.info('**********************************************************')
     result = False
     try:
@@ -88,7 +88,7 @@ def serviceextractDocumentMetadata(injestInsightJobIdentifier):
         assert True == result
 
 # *************************************************
-def serviceconvertDocument(extractDocumentMetadataJobIdentifier):
+def convertDocument(extractDocumentMetadataJobIdentifier):
     logger.info('**********************************************************')
     result = False
     try:
@@ -114,7 +114,7 @@ def serviceconvertDocument(extractDocumentMetadataJobIdentifier):
         assert True == result
 
 # *************************************************
-def serviceclassifyDocument(convertDocumentJobIdentifier):
+def classifyDocument(convertDocumentJobIdentifier):
     logger.info('**********************************************************')
     result = False
     try:
@@ -140,7 +140,7 @@ def serviceclassifyDocument(convertDocumentJobIdentifier):
         assert True == result
 
 # *************************************************
-def serviceextractDocumentElements(classifyDocumentJobIdentifier):
+def extractDocumentElements(classifyDocumentJobIdentifier):
     logger.info('**********************************************************')
     result = False
     try:
@@ -166,7 +166,7 @@ def serviceextractDocumentElements(classifyDocumentJobIdentifier):
         assert True == result
 
 # *************************************************
-def serviceextractDocumentText(extractDocumentElementsJobIdentifier):
+def extractDocumentText(extractDocumentElementsJobIdentifier):
     logger.info('**********************************************************')
     result = False
     try:
@@ -200,7 +200,7 @@ def serviceextractDocumentText(extractDocumentElementsJobIdentifier):
 @allure.feature('Feature1')
 @allure.story('Smoke','Regression','upload')
 def test_uploadreq():
-    serviceupload(DataVariables.CmsImage)
+    upload(DataVariables.CmsImage)
 
 #****************************************************
 #To Validate The JobId returned by InsightIngest
@@ -210,7 +210,7 @@ def test_uploadreq():
 @allure.feature('Feature1')
 @allure.story('Smoke','InsightIngest')
 def test_InsightIngest():
-    serviceinsightIngest(serviceupload(DataVariables.CmsImage))
+    insightIngest(upload(DataVariables.CmsImage))
 #****************************************************
 
 #To Validate The JobId returned by ExtractDocumentMetadata
@@ -220,7 +220,7 @@ def test_InsightIngest():
 @allure.feature('Feature1')
 @allure.story('Smoke','ExtractDocumentMetadata')
 def test_ExtractDocumentMetadata():
-    serviceextractDocumentMetadata(serviceinsightIngest(serviceupload(DataVariables.CmsImage)))
+    extractDocumentMetadata(insightIngest(upload(DataVariables.CmsImage)))
 #****************************************************
 #To Validate The JobId returned by ConvertDocument
 #****************************************************
@@ -229,7 +229,7 @@ def test_ExtractDocumentMetadata():
 @allure.feature('Feature1')
 @allure.story('Smoke','ConvertDocument')
 def test_ConvertDocument():
-    serviceconvertDocument(serviceextractDocumentMetadata(serviceinsightIngest(serviceupload(DataVariables.CmsImage))))
+    convertDocument(extractDocumentMetadata(insightIngest(upload(DataVariables.CmsImage))))
 #****************************************************
 #To Validate The JobId returned by ClassifyDocument
 #****************************************************
@@ -238,7 +238,7 @@ def test_ConvertDocument():
 @allure.feature('Feature1')
 @allure.story('Smoke','ClassifyDocument')
 def test_ClassifyDocument():
-    serviceclassifyDocument(serviceconvertDocument(serviceextractDocumentMetadata(serviceinsightIngest(serviceupload(DataVariables.CmsImage)))))
+    classifyDocument(convertDocument(extractDocumentMetadata(insightIngest(upload(DataVariables.CmsImage)))))
 #****************************************************
 #To Validate The JobId returned by ExtractDocumentElements
 #****************************************************
@@ -247,7 +247,7 @@ def test_ClassifyDocument():
 @allure.feature('Feature1')
 @allure.story('Smoke','ExtractDocumentElements')
 def test_ExtractDocumentElements():
-    serviceextractDocumentElements(serviceclassifyDocument(serviceconvertDocument(serviceextractDocumentMetadata(serviceinsightIngest(serviceupload(DataVariables.CmsImage))))))
+    extractDocumentElements(classifyDocument(convertDocument(extractDocumentMetadata(insightIngest(upload(DataVariables.CmsImage))))))
 #****************************************************
 #To Validate The JobId returned by ExtractDocumentText
 #****************************************************
@@ -256,40 +256,5 @@ def test_ExtractDocumentElements():
 @allure.feature('Feature1')
 @allure.story('Smoke','ExtractDocumentText')
 def test_ExtractDocumentText():
-    serviceextractDocumentText(serviceextractDocumentElements(serviceclassifyDocument(serviceconvertDocument(serviceextractDocumentMetadata(serviceinsightIngest(serviceupload(DataVariables.CmsImage)))))))
+    extractDocumentText(extractDocumentElements(classifyDocument(convertDocument(extractDocumentMetadata(insightIngest(upload(DataVariables.CmsImage)))))))
 #****************************************************
-#To Validate The JobId returned by ExtractDocumentText
-#****************************************************
-@pytest.allure.severity(pytest.allure.severity_level.CRITICAL)
-@pytest.allure.step('To Test The JobId returned by ExtractDocumentText')
-@allure.feature('Feature1')
-@allure.story('Smoke','TC01_Service_upload')
-def test_TC01Serviceupload():
-    executeRangerApi(["TC01_Service_upload"])
-#**************************************************** Upload-insightingest
-@pytest.allure.severity(pytest.allure.severity_level.CRITICAL)
-@pytest.allure.step('To Test The JobId returned by Upload-insightingest')
-@allure.feature('Feature1')
-@allure.story('Smoke','TC08_Service_Upload-insightingest')
-def test_TC08ServiceChain():
-    executeRangerApi(["TC08_Service_Upload-insightingest"])
-#****************************************************
-excelObj = ExcelReading.ExcelOperations()
-#****************************************************
-
-def executeRangerApi(restapilist):
-    for i in range(len(restapilist)):
-        print('values in list are : ', restapilist[i])
-        if(str(restapilist[i]).__contains__("-")):
-            print(str(restapilist[i]) + "Contains minus - ")
-        elif(str(restapilist[i]).split('_')[1].lower()+str(restapilist[i]).split('_')[2].lower() == 'Serviceupload'.lower()):
-            print(str(restapilist[i]) + "contains underscore_")
-            executeApi(str(restapilist[i]).split('_')[0].lower(),str(restapilist[i]).split('_')[1].lower()+str(restapilist[i]).split('_')[2].lower())
-
-
-
-def executeApi(tcid,strService):
-    if(strService.lower() == 'Serviceupload'):
-        fileName = excelObj.getExcelData(tcid,'FileName')
-        serviceupload(fileName)
-
