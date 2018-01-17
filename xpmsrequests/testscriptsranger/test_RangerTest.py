@@ -62,6 +62,8 @@ def serviceinsightIngest(uploadJson):
         assert True == result
 
 # *************************************************
+
+
 def serviceextractDocumentMetadata(injestInsightJobIdentifier):
     logger.info('**********************************************************')
     result = False
@@ -263,9 +265,9 @@ def test_ExtractDocumentText():
 @pytest.allure.severity(pytest.allure.severity_level.CRITICAL)
 @pytest.allure.step('To Test The JobId returned by ExtractDocumentText')
 @allure.feature('Feature1')
-@allure.story('Smoke','TC01_Service_upload')
-def test_TC01Serviceupload():
-    executeRangerApi(["TC01_Service_upload"])
+@allure.story('Smoke','TC01_serviceupload')
+def test_TC01_serviceupload():
+    executeRangerApi(['TC01_serviceupload'])
 #**************************************************** Upload-insightingest
 @pytest.allure.severity(pytest.allure.severity_level.CRITICAL)
 @pytest.allure.step('To Test The JobId returned by Upload-insightingest')
@@ -273,8 +275,11 @@ def test_TC01Serviceupload():
 @allure.story('Smoke','TC08_Service_Upload-insightingest')
 def test_TC08ServiceChain():
     executeRangerApi(["TC08_Service_Upload-insightingest"])
+
+#****************************************************
 #****************************************************
 excelObj = ExcelReading.ExcelOperations()
+#****************************************************
 #****************************************************
 
 def executeRangerApi(restapilist):
@@ -282,14 +287,45 @@ def executeRangerApi(restapilist):
         print('values in list are : ', restapilist[i])
         if(str(restapilist[i]).__contains__("-")):
             print(str(restapilist[i]) + "Contains minus - ")
-        elif(str(restapilist[i]).split('_')[1].lower()+str(restapilist[i]).split('_')[2].lower() == 'Serviceupload'.lower()):
+        elif(str(restapilist[i].split('_')[1].lower()) == 'serviceupload'.lower()):
             print(str(restapilist[i]) + "contains underscore_")
-            executeApi(str(restapilist[i]).split('_')[0].lower(),str(restapilist[i]).split('_')[1].lower()+str(restapilist[i]).split('_')[2].lower())
+            executeApi(str(restapilist[i].split('_')[0]),str(restapilist[i].split('_')[1]).lower())
 
 
 
 def executeApi(tcid,strService):
-    if(strService.lower() == 'Serviceupload'):
+    if strService.lower() == 'serviceupload':
+        print("into serviceupload and tcid is,",tcid)
         fileName = excelObj.getExcelData(tcid,'FileName')
         serviceupload(fileName)
+    elif strService.lower() == 'serviceinsightingest':
+        print("into serviceupload and tcid is,",tcid)
+        fileName = excelObj.getExcelData(tcid,'FileName')
+        serviceinsightIngest(fileName)
+    elif strService.lower() == 'serviceextractdocumentmetadata':
+        print("into serviceupload and tcid is,",tcid)
+        fileName = excelObj.getExcelData(tcid,'FileName')
+        serviceextractDocumentMetadata(fileName)
+    elif strService.lower() == 'serviceconvertdocument':
+        print("into serviceupload and tcid is,",tcid)
+        fileName = excelObj.getExcelData(tcid,'FileName')
+        serviceconvertDocument(fileName)
+    elif strService.lower() == 'serviceclassifydocument':
+        print("into serviceupload and tcid is,",tcid)
+        fileName = excelObj.getExcelData(tcid,'FileName')
+        serviceclassifyDocument(fileName)
+    elif strService.lower() == 'serviceextractdocumentelements':
+        print("into serviceupload and tcid is,",tcid)
+        fileName = excelObj.getExcelData(tcid,'FileName')
+        serviceextractDocumentElements(fileName)
+    elif strService.lower() == 'serviceextractdocumenttext':
+        print("into serviceupload and tcid is,",tcid)
+        fileName = excelObj.getExcelData(tcid,'FileName')
+        serviceextractDocumentText(fileName)
+
+
+
+
+
+
 

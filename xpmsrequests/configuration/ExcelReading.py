@@ -28,7 +28,8 @@ class ExcelOperations:
                 print(result_data[l])
                 if(result_data[l][3]=="Y"):
                     print(result_data[l][1])
-                    executionList.append(result_data[l][0]+"_"+result_data[l][1]+"_"+result_data[l][2])
+                    #executionList.append(result_data[l][0]+"_"+result_data[l][1]+"_"+result_data[l][2])
+                    executionList.append(result_data[l][0] + "_" + result_data[l][2])
 
         except(Exception):
             executionList = []
@@ -58,7 +59,10 @@ class ExcelOperations:
                     tempRow = curr_row
                 print("Row data :", data)
                 # **********************************************
-            print("Required Value Is :",worksheet.cell_value(tempRow, tempColumn))
+            result_data = worksheet.cell_value(tempRow, tempColumn)
+            print("Required Value Is :",result_data)
+            return result_data
+
         except:
             result_data = ''
 
